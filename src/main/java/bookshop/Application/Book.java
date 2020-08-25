@@ -14,14 +14,17 @@ public class Book {
     private String name;
     @Column
     private String author;
+    @Column
+    private String image;
 
     public Book() {
     }
 
-    public Book(int id, String name, String author) {
+    public Book(int id, String name, String author, String image) {
         this.id = id;
         this.name = name;
         this.author = author;
+        this.image = image;
     }
 
     public int getId() {
@@ -47,6 +50,10 @@ public class Book {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+    public String getImage() { return image; }
+
+    public void setImage(String image) { this.image = image; }
 
     @Override
     public String toString() {

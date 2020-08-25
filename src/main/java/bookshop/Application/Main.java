@@ -33,13 +33,14 @@ public class Main {
             jdbcTemplate.execute("CREATE TABLE Book (" +
                     "id INT PRIMARY KEY," +
                     "name VARCHAR(100)," +
-                    "author VARCHAR (100)" +
+                    "author VARCHAR (100)," +
+                    "image BLOB" +
                     ");"
             );
 
-            bookService.save(new Book(1, "Misery", "Stephen King"));
-            bookService.save(new Book(2, "Harry Potter", "J.K.Rowling"));
-            bookService.save(new Book(3, "The Golden Compass", "Philip Pullman"));
+            bookService.save(new Book(1, "Misery", "Stephen King", "C:\\Users\\rorya\\Pictures\\images for project\\Misery.jpg"));
+            bookService.save(new Book(2, "Harry Potter", "J.K.Rowling", "C:\\Users\\rorya\\Pictures\\images for project\\Harry Potter.jpg"));
+            bookService.save(new Book(3, "The Golden Compass", "Philip Pullman", "C:\\Users\\rorya\\Pictures\\images for project\\The Golden Compass.jpg"));
 
             bookService.findAll().forEach(System.out::println);
 
