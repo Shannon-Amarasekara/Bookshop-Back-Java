@@ -26,7 +26,7 @@ public class Main {
     }
 
     @Bean
-    CommandLineRunner init(BookService bookService){
+    CommandLineRunner init(BookService bookService) {
         return args -> {
             jdbcTemplate.execute("DROP TABLE IF EXISTS Book");
 
@@ -38,9 +38,9 @@ public class Main {
                     ");"
             );
 
-            bookService.save(new Book(1, "Misery", "Stephen King", "C:\\Users\\rorya\\Pictures\\images for project\\Misery.jpg"));
-            bookService.save(new Book(2, "Harry Potter", "J.K.Rowling", "C:\\Users\\rorya\\Pictures\\images for project\\Harry Potter.jpg"));
-            bookService.save(new Book(3, "The Golden Compass", "Philip Pullman", "C:\\Users\\rorya\\Pictures\\images for project\\The Golden Compass.jpg"));
+            bookService.save(new Book(1, "Misery", "Stephen King", "/assets/images/misery.jpg"));
+            bookService.save(new Book(2, "Harry Potter", "J.K.Rowling", "/assets/images/harry-potter.jpg"));
+            bookService.save(new Book(3, "The Golden Compass", "Philip Pullman", "/assets/images/the-golden-compass.jpg"));
 
             bookService.findAll().forEach(System.out::println);
 
