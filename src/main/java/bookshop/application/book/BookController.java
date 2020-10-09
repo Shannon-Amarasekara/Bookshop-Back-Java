@@ -1,16 +1,12 @@
-package bookshop.Application;
-
+package bookshop.application.book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 
 @RestController
 @RequestMapping
 @CrossOrigin("http://localhost:4200")
-public class Controller {
+public class BookController {
 
     @Autowired
     private BookService bookService;
@@ -20,13 +16,9 @@ public class Controller {
         return bookService.findAll();
     }
 
-    @GetMapping(value = "books/name/{bookName}")
-    public List<Book> findByName(@PathVariable("bookName") String name){
+    @GetMapping(value = "books/{name}")
+    public Iterable<Book> findByName(@PathVariable String name){
         return bookService.findByName(name);
     }
-
-    @GetMapping(value = "books/id/{bookId}")
-    public Optional<Book> getBook(@PathVariable("bookId") int bookId){
-        return bookService.getBook(bookId);
-    }
 }
+
