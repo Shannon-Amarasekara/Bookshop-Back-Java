@@ -1,6 +1,5 @@
 package bookshop.application.book;
 
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -18,32 +17,28 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name", length = 200, nullable = false, unique = false)
+    @Column(name = "name", length = 200, nullable = false)
     private String name;
 
-    @Column(name = "author", length = 200, nullable = false, unique = false)
+    @Column(name = "author", length = 200, nullable = false)
     private String author;
 
-    @Column(name = "image", length = 200, nullable = false, unique = false)
+    @Column(name = "image", length = 200, nullable = false)
     private String image;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "genre", length = 25)
     private Genre genre;
 
-    @Type(type = "org.hibernate.type.NumericBooleanType")
-    @Column(name = "is_fiction")
-    private boolean isFiction;
+    public Book() {
+    }
 
-    public Book() { }
-
-    public Book(int id, String name, String author, String image, Genre genre, boolean isFiction) {
+    public Book(int id, String name, String author, String image, Genre genre) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.image = image;
         this.genre = genre;
-        this.isFiction = isFiction;
     }
 
     public int getId() {
@@ -78,13 +73,13 @@ public class Book {
         this.image = image;
     }
 
-    public Genre getGenre() { return genre; }
+    public Genre getGenre() {
+        return genre;
+    }
 
-    public void setGenre(Genre genre) { this.genre = genre; }
-
-    public boolean isFiction() { return isFiction; }
-
-    public void setFiction(boolean fiction) { isFiction = fiction; }
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 
     @Override
     public String toString() {
@@ -94,7 +89,6 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", image='" + image + '\'' +
                 ", genre=" + genre +
-                ", isFiction=" + isFiction +
                 '}';
     }
 }
