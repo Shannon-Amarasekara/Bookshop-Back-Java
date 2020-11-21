@@ -1,5 +1,8 @@
-package bookshop.application.book;
+package bookshop.application.controller;
 
+import bookshop.application.book.Book;
+import bookshop.application.book.BookService;
+import bookshop.application.book.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +27,9 @@ public class BookController {
         return bookService.findByGenre(genre);
     }
 
-//    @GetMapping(value = "books/genres/{genreList}")
-//    public String findByGenres(@RequestParam Genre[] genres) {
-//        return "dummy";
-////        return bookService.findByGenres(genres);
-//    }
+    @GetMapping(value = "books/fiveRandomBestsellers")
+    public Iterable<Book> findFiveRandomBestsellers(){
+        return bookService.getFiveBestsellersRandomly();
+    }
 }
 
