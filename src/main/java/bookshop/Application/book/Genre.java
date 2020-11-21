@@ -5,7 +5,8 @@ public enum Genre {
     Horror("Horror"),
     Fantasy("Fantasy"),
     Romance("Romance"),
-    Science("Science");
+    Science("Science"),
+    Philosophy("Philosophy");
 
     private final String genreName;
 

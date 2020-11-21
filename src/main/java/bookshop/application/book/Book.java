@@ -30,15 +30,19 @@ public class Book {
     @Column(name = "genre", length = 25)
     private Genre genre;
 
+    @Column(name = "copies_sold", length = 100, nullable = false)
+    private long copiesSold;
+
     public Book() {
     }
 
-    public Book(int id, String name, String author, String image, Genre genre) {
+    public Book(int id, String name, String author, String image, Genre genre, long copiesSold) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.image = image;
         this.genre = genre;
+        this.copiesSold = copiesSold;
     }
 
     public int getId() {
@@ -81,6 +85,10 @@ public class Book {
         this.genre = genre;
     }
 
+    public long getCopiesSold() { return copiesSold; }
+
+    public void setCopiesSold(long copiesSold) { this.copiesSold = copiesSold; }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -89,6 +97,7 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", image='" + image + '\'' +
                 ", genre=" + genre +
+                ", copiesSold=" + copiesSold +
                 '}';
     }
 }

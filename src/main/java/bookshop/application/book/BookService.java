@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @CrossOrigin("http://localhost:4200")
@@ -56,18 +57,31 @@ public class BookService implements BookDAO {
     }
 
     @Override
-    public List<Book> findByGenres(Genre[] genres) {
+    public List<Book> getBestsellers() {
         List<Book> books = getBooks();
-        List<Book> booksWithGenres = new ArrayList<>();
+        List<Book> bestsellers = new ArrayList<>();
 
-        for(Book book: books){
-            for(Genre genre: genres){
-                if(book.getGenre().equals(genre)){
-                    booksWithGenres.add(book);
-                }
+        for (Book book : books) {
+            if (book.getCopiesSold() > 5000000) {
+                bestsellers.add(book);
             }
         }
-        return booksWithGenres;
+        return bestsellers;
     }
 
+    @Override
+    public List<Book> getFiveBestsellersRandomly() {
+        List<Book> bestsellers = getBestsellers();
+        List<Book> randomBestsellers = new ArrayList<>();
+        Random random = new Random();
+
+        while (randomBestsellers.size() < 5) {
+            Book randomBook = bestsellers.get(random.nextInt(bestsellers.size()));
+
+            if (!randomBestsellers.contains(randomBook)) {
+                randomBestsellers.add(randomBook);
+            }
+        }
+        return randomBestsellers;
+    }
 }

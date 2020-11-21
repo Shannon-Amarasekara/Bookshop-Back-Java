@@ -15,6 +15,8 @@ public interface BookDAO {
 
     List<Book> findByGenre(Genre genre);
 
-    List<Book> findByGenres(Genre[] genres);
+    List<Book> getBestsellers();
+
+    List<Book> getFiveBestsellersRandomly();
 
 }
