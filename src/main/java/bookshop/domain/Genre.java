@@ -1,4 +1,4 @@
-package bookshop.application.book;
+package bookshop.domain;
 
 public enum Genre {
 

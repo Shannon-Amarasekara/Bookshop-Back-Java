@@ -1,8 +1,9 @@
-package bookshop.application;
+package bookshop;
 
-import bookshop.application.book.Book;
-import bookshop.application.book.BookService;
-import bookshop.application.book.Genre;
+import bookshop.infrastructure.Book;
+import bookshop.domain.BookService;
+import bookshop.domain.Genre;
+import bookshop.infrastructure.BooksRepositoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,11 +12,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.List;
-
-import static bookshop.application.book.Genre.*;
+import static bookshop.domain.Genre.*;
 
 @SpringBootApplication
+//TODO rename class
 public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
@@ -27,6 +27,7 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
+    //TODO move
     @Bean
     CommandLineRunner init(BookService bookService) {
         return args -> {
@@ -56,12 +57,6 @@ public class Main {
             bookService.saveBook(theCatcherInTheRye);
             bookService.saveBook(theLightBetweenOceans);
 
-
-            List<Book> books = bookService.getBooks();
-            System.out.println("The books: " + books);
-
-            List<Book> bestsellers = bookService.getFiveBestsellersRandomly();
-            System.out.println("Bestsellers are" + bestsellers);
 
         };
     }

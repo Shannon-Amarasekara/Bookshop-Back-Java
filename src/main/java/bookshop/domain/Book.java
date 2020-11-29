@@ -1,36 +1,20 @@
-package bookshop.application.book;
+package bookshop.domain;
 
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "books")
-
-@NamedQueries({
-        @NamedQuery(name = "find all books", query = "select b from Book b"),
-})
+import java.util.Objects;
 
 public class Book {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name", length = 200, nullable = false)
     private String name;
 
-    @Column(name = "author", length = 200, nullable = false)
     private String author;
 
-    @Column(name = "image", length = 200, nullable = false)
     private String image;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "genre", length = 25)
     private Genre genre;
 
-    @Column(name = "copies_sold", length = 100, nullable = false)
     private long copiesSold;
 
     public Book() {
@@ -85,9 +69,31 @@ public class Book {
         this.genre = genre;
     }
 
-    public long getCopiesSold() { return copiesSold; }
+    public long getCopiesSold() {
+        return copiesSold;
+    }
 
-    public void setCopiesSold(long copiesSold) { this.copiesSold = copiesSold; }
+    public void setCopiesSold(long copiesSold) {
+        this.copiesSold = copiesSold;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id == book.id &&
+                copiesSold == book.copiesSold &&
+                name.equals(book.name) &&
+                author.equals(book.author) &&
+                image.equals(book.image) &&
+                genre == book.genre;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, author, image, genre, copiesSold);
+    }
 
     @Override
     public String toString() {
