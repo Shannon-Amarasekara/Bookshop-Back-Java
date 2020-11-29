@@ -1,11 +1,12 @@
-package bookshop.application.book;
+package bookshop.domain;
 
 public enum Genre {
 
     Horror("Horror"),
     Fantasy("Fantasy"),
     Romance("Romance"),
-    Science("Science");
+    Science("Science"),
+    Philosophy("Philosophy");
 
     private final String genreName;
 
