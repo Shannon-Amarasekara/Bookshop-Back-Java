@@ -1,32 +1,25 @@
 package bookshop.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.*;
 import java.util.List;
 
 @Service
-@CrossOrigin("http://localhost:4200")
 public class BookService {
-
-    @Autowired
-    private EntityManager entityManager;
 
     private BooksRepository booksRepository;
 
-    public BookService(EntityManager entityManager, BooksRepository booksRepository) {
-        this.entityManager = entityManager;
+    public BookService(BooksRepository booksRepository) {
         this.booksRepository = booksRepository;
     }
 
-    @Transactional
-    //TODO use domain only
-    public void saveBook(bookshop.infrastructure.Book book) {
-        entityManager.persist(book);
+    public void saveBook(Book book) {
+        booksRepository.saveBook(book);
+    }
+
+    public void saveBooks(Set<Book> books) {
+        booksRepository.saveBooks(books);
     }
 
     public Set<Book> getBooks() {
@@ -42,15 +35,14 @@ public class BookService {
     }
 
     public Set<Book> getFiveRandomBestsellers() {
+        List<Book> bestsellers = new ArrayList<>(booksRepository.getTenBestsellerBooks());
+        Random random = new Random();
 
-        List<Book> tenBestsellersList = new ArrayList<>(booksRepository.getTenBestsellerBooks());
-        Set<Book> fiveBestsellersSet = new HashSet<>();
-
-        while (fiveBestsellersSet.size() < 5) {
-            Book book = tenBestsellersList.get(new Random().nextInt(tenBestsellersList.size()));
-            fiveBestsellersSet.add(book);
+        while (bestsellers.size() > 5) {
+            Book book = bestsellers.get(random.nextInt(bestsellers.size()));
+            bestsellers.remove(book);
         }
 
-        return fiveBestsellersSet;
+        return new HashSet<>(bestsellers);
     }
 }

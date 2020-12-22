@@ -15,41 +15,58 @@ public class BooksRepositoryImpl implements BooksRepository {
 
     private JdbcTemplate jdbcTemplate;
 
-    private BookMapper bookMapper = new BookMapper();
+    private SqlDataToBookMapper sqlDataToBookMapper;
 
-    public BooksRepositoryImpl(JdbcTemplate jdbcTemplate) {
+    public BooksRepositoryImpl(JdbcTemplate jdbcTemplate, SqlDataToBookMapper sqlDataToBookMapper) {
         this.jdbcTemplate = jdbcTemplate;
+        this.sqlDataToBookMapper = sqlDataToBookMapper;
+    }
+
+    @Override
+    public void saveBook(Book book) {
+        String sql = "INSERT INTO BOOKS (id, author, copies_sold, image, name, genre) VALUES (" +
+                book.getId() + ", '" +
+                book.getAuthor() + "', " +
+                book.getCopiesSold() + ", '" +
+                book.getImage() + "', '" +
+                book.getName() + "', '" +
+                book.getGenre().getGenreName() + "');";
+
+        jdbcTemplate.update(sql);
+    }
+
+    @Override
+    public void saveBooks(Set<Book> books) {
+        for (Book book : books) {
+            saveBook(book);
+        }
     }
 
     @Override
     public Set<Book> getTenBestsellerBooks() {
         String sqlQuery = "select * from books order by copies_sold desc limit 10";
-        List<bookshop.infrastructure.Book> books = jdbcTemplate.query(sqlQuery, new BookMapper());
-        return convertToDomainObject(new HashSet<>(books));
+        return new HashSet<>(executeSqlQuery(sqlQuery));
     }
 
     @Override
     public Set<Book> getBooks() {
-        String sqlSelectAll = "select * from books";
-        List<bookshop.infrastructure.Book> books = jdbcTemplate.query(sqlSelectAll, new BookMapper());
-        return convertToDomainObject(new HashSet<>(books));
+        String sqlQuery = "select * from books";
+        return new HashSet<>(executeSqlQuery(sqlQuery));
     }
 
     @Override
     public Set<Book> findBookByName(String name) {
         String sqlQuery = "select * from books where name like '%" + name + "%' ";
-        List<bookshop.infrastructure.Book> books = jdbcTemplate.query(sqlQuery, new BookMapper());
-        return convertToDomainObject(new HashSet<>(books));
+        return new HashSet<>(executeSqlQuery(sqlQuery));
     }
 
     @Override
     public Set<Book> findBooksByGenre(Genre genre) {
         String sqlQuery = "select * from books where genre = '" + genre.getGenreName() + "'";
-        List<bookshop.infrastructure.Book> books = jdbcTemplate.query(sqlQuery, new BookMapper());
-        return convertToDomainObject(new HashSet<>(books));
+        return new HashSet<>(executeSqlQuery(sqlQuery));
     }
 
-    private Set<Book> convertToDomainObject(Set<bookshop.infrastructure.Book> fiveRandomBestSellersFromBookTable) {
-        return bookMapper.mapSetOfBooksToBookInDomain(fiveRandomBestSellersFromBookTable);
+    private List<Book> executeSqlQuery(String sqlQuery) {
+        return jdbcTemplate.query(sqlQuery, sqlDataToBookMapper);
     }
 }

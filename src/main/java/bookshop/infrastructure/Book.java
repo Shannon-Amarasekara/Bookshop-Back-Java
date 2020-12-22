@@ -8,11 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "books")
 
-@NamedQueries({
-        @NamedQuery(name = "find all books", query = "select b from Book b"),
-})
-
-//Delete
 public class Book {
 
     @Id
