@@ -1,8 +1,8 @@
 package bookshop;
 
-import bookshop.domain.Book;
-import bookshop.domain.BookService;
-import bookshop.domain.Genre;
+import bookshop.domain.book.Book;
+import bookshop.domain.book.service.BookService;
+import bookshop.domain.book.Genre;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,7 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import static bookshop.domain.Genre.*;
+import static bookshop.domain.book.Genre.*;
 
 @SpringBootApplication
 //TODO rename class

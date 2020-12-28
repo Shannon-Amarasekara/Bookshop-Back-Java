@@ -1,8 +1,8 @@
 package bookshop.application.controller;
 
-import bookshop.domain.Book;
-import bookshop.domain.BookService;
-import bookshop.domain.Genre;
+import bookshop.domain.book.Book;
+import bookshop.domain.book.service.BookService;
+import bookshop.domain.book.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,17 +21,17 @@ public class BookController {
         return bookService.getBooks();
     }
 
-    @GetMapping(value = "books/{name}")
+    @GetMapping("books/{name}")
     public Set<Book> findBookByName(@PathVariable String name) {
         return bookService.findBookByName(name);
     }
 
-    @GetMapping(value = "books/genre/{genre}")
+    @GetMapping("books/genre/{genre}")
     public Set<Book> findBooksByGenre(@PathVariable Genre genre) {
         return bookService.findBooksByGenre(genre);
     }
 
-    @GetMapping(value = "books/fiveRandomBestsellers")
+    @GetMapping("books/fiveRandomBestsellers")
     public Set<Book> findFiveRandomBestsellers() {
         return bookService.getFiveRandomBestsellers();
     }

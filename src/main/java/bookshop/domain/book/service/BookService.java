@@ -1,5 +1,8 @@
-package bookshop.domain;
+package bookshop.domain.book.service;
 
+import bookshop.domain.book.Book;
+import bookshop.domain.book.repository.BooksRepository;
+import bookshop.domain.book.Genre;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

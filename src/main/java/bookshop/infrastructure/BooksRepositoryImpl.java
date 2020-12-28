@@ -1,8 +1,8 @@
 package bookshop.infrastructure;
 
-import bookshop.domain.Book;
-import bookshop.domain.BooksRepository;
-import bookshop.domain.Genre;
+import bookshop.domain.book.Book;
+import bookshop.domain.book.repository.BooksRepository;
+import bookshop.domain.book.Genre;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

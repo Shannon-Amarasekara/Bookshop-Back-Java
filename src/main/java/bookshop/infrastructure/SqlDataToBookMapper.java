@@ -1,6 +1,7 @@
 package bookshop.infrastructure;
 
-import bookshop.domain.Genre;
+import bookshop.domain.book.Genre;
+import bookshop.domain.book.Book;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
@@ -8,14 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Service
-public class SqlDataToBookMapper implements RowMapper<bookshop.domain.Book>{
+public class SqlDataToBookMapper implements RowMapper<Book>{
 
     public SqlDataToBookMapper() {
     }
 
     @Override
-    public bookshop.domain.Book mapRow(ResultSet resultSet, int i) throws SQLException {
-        bookshop.domain.Book book = new bookshop.domain.Book();
+    public Book mapRow(ResultSet resultSet, int i) throws SQLException {
+        Book book = new Book();
 
         book.setId(resultSet.getInt("id"));
         book.setAuthor(resultSet.getString("author"));
