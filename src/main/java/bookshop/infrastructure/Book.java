@@ -1,7 +1,7 @@
 package bookshop.infrastructure;
 
 
-import bookshop.domain.Genre;
+import bookshop.domain.book.Genre;
 
 import javax.persistence.*;
 

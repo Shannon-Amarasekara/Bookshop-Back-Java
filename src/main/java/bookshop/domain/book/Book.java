@@ -1,4 +1,4 @@
-package bookshop.domain;
+package bookshop.domain.book;
 
 
 import java.util.Objects;

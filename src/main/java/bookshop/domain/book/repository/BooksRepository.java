@@ -1,4 +1,7 @@
-package bookshop.domain;
+package bookshop.domain.book.repository;
+
+import bookshop.domain.book.Book;
+import bookshop.domain.book.Genre;
 
 import java.util.Set;
 
@@ -15,5 +18,4 @@ public interface BooksRepository {
     Set<Book> findBookByName(String name);
 
     Set<Book> findBooksByGenre(Genre genre);
-
 }
