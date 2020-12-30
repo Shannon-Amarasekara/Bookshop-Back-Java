@@ -1,16 +1,16 @@
-package bookshop.application.controller;
+package bookshop.application.port.rest.controller;
 
 import bookshop.domain.user.UserId;
 import bookshop.domain.book.BookId;
 import bookshop.domain.book.service.BookService;
 import bookshop.domain.user.basket.Basket;
+import bookshop.domain.user.basket.BookIds;
 import bookshop.domain.user.basket.service.UserBasketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Set;
 
 
 @RestController
@@ -30,7 +30,13 @@ public class UserBasketController {
         userBasketService.addBookToBasket(bookId, userId);
     }
 
-    @GetMapping("getBasket")
+    @GetMapping("getBasketBookIds")
+    public BookIds getBasketBookIds() throws UnknownHostException {
+        UserId userId = createUserId();
+        return userBasketService.getBasketBookIds(userId);
+    }
+
+    @GetMapping("viewBasket")
     public Basket getBasket() throws UnknownHostException {
         UserId userId = createUserId();
         return userBasketService.getBasket(userId);

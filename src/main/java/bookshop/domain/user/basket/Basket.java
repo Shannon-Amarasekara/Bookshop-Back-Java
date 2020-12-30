@@ -1,20 +1,25 @@
 package bookshop.domain.user.basket;
 
-import bookshop.domain.book.BookId;
+import bookshop.domain.book.Book;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 public class Basket {
 
-    private Set<BookId> bookIds;
+    private Set<Book> books;
 
-    public Basket(Set<BookId> bookIds) {
-        this.bookIds = bookIds;
+    public Basket(Set<Book> books){
+        this.books = books;
     }
 
-    public void add(BookId bookId) {
-        this.bookIds.add(bookId);
+    public static Basket createEmptyBasket() {
+        return new Basket(new HashSet<>());
+    }
+
+    public Set<Book> getBooks() {
+        return books;
     }
 
     @Override
@@ -22,11 +27,11 @@ public class Basket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Basket basket = (Basket) o;
-        return Objects.equals(bookIds, basket.bookIds);
+        return Objects.equals(books, basket.books);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookIds);
+        return Objects.hash(books);
     }
 }

@@ -1,49 +1,74 @@
 package bookshop.domain.user.basket.service;
 
+import bookshop.domain.book.Book;
+import bookshop.domain.book.repository.BookRepository;
 import bookshop.domain.user.basket.Basket;
+import bookshop.domain.user.basket.BookIds;
 import bookshop.domain.book.BookId;
 import bookshop.domain.user.UserId;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 
 @Service
 public class UserBasketService {
 
-    private HashMap<UserId, Basket> basketsAndIds;
+    private HashMap<UserId, BookIds> basketsAndIds;
 
-    public UserBasketService() {
+    private BookRepository bookRepository;
+
+    public UserBasketService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
         this.basketsAndIds = new HashMap<>();
     }
 
     public void addBookToBasket(BookId bookId, UserId userId) {
-        createNewBasketIfInexistent(userId);
+        createNewBasketBookIdsIfInexistent(userId);
         addBookToExistingBasket(userId, bookId);
     }
 
     public Basket getBasket(UserId userId) {
-        createNewBasketIfInexistent(userId);
-        return findExistingBasket(userId);
+        if (basketExists(userId)) {
+            BookIds bookIds = findExistingBasketBookIds(userId);
+            return createBasketFromBookIds(bookIds);
+        } else {
+            return emptyBasket();
+        }
+    }
+
+    private Basket emptyBasket() {
+        return Basket.createEmptyBasket();
+    }
+
+    private Basket createBasketFromBookIds(BookIds bookIds) {
+        Set<Book> books = bookRepository.findBooksByIds(bookIds);
+        return new Basket(books);
+    }
+
+    public BookIds getBasketBookIds(UserId userId) {
+        createNewBasketBookIdsIfInexistent(userId);
+        return findExistingBasketBookIds(userId);
     }
 
     private void addBookToExistingBasket(UserId userId, BookId bookId) {
-        findExistingBasket(userId).add(bookId);
+        findExistingBasketBookIds(userId).add(bookId);
     }
 
-    private void createNewBasketIfInexistent(UserId userId) {
+    private void createNewBasketBookIdsIfInexistent(UserId userId) {
         if (!basketExists(userId)) {
             createNewBasket(userId);
         }
     }
 
-    private Basket findExistingBasket(UserId userId) {
+    private BookIds findExistingBasketBookIds(UserId userId) {
         return basketsAndIds.get(userId);
     }
 
     private void createNewBasket(UserId userId) {
-        this.basketsAndIds.put(userId, new Basket(new HashSet<>()));
+        this.basketsAndIds.put(userId, new BookIds(new HashSet<>()));
     }
 
     private boolean basketExists(UserId userId) {

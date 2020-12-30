@@ -1,8 +1,8 @@
-package bookshop.domain.book;
+package bookshop.application.dto;
 
 import bookshop.domain.book.author.Author;
-
-import java.util.Objects;
+import bookshop.domain.book.BookId;
+import bookshop.domain.book.Genre;
 
 public class Book {
 
@@ -16,15 +16,14 @@ public class Book {
     public Book() {
     }
 
-    public Book(BookId bookId, String name, Genre genre, Author author, long copiesSold, String image) {
-        this.id = bookId;
+    public Book(BookId id, String name, Genre genre, Author author, long copiesSold, String image) {
+        this.id = id;
         this.name = name;
         this.genre = genre;
         this.author = author;
         this.copiesSold = copiesSold;
         this.image = image;
     }
-
 
     public BookId getId() {
         return id;
@@ -72,23 +71,5 @@ public class Book {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return copiesSold == book.copiesSold &&
-                Objects.equals(id, book.id) &&
-                Objects.equals(name, book.name) &&
-                genre == book.genre &&
-                Objects.equals(author, book.author) &&
-                Objects.equals(image, book.image);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, genre, author, copiesSold, image);
     }
 }
