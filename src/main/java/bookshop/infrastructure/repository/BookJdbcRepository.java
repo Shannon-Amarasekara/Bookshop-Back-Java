@@ -18,7 +18,7 @@ import java.util.Set;
 @Repository
 public class BookJdbcRepository implements BookRepository {
 
-    private static final String leftJoinSqlQuery = "select b.id, b.author_id, b.name, b.genre, b.copies_sold, b.image, a.first_name, a.last_name, a.synopsis " +
+    private static final String leftJoinSqlQuery = "select b.id, b.author_id, b.name, b.genre, b.copies_sold, b.image, b.price, a.first_name, a.last_name, a.synopsis " +
             "from books as b " +
             "left join authors as a " +
             "on b.author_id = a.id ";

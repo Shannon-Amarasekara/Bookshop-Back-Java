@@ -25,6 +25,7 @@ public class SqlDataToBookMapper implements RowMapper<Book> {
         book.setCopiesSold(resultSet.getLong("copies_sold"));
         book.setImage(resultSet.getString("image"));
         book.setGenre(convertToGenre(resultSet.getString("genre")));
+        book.setPrice(resultSet.getBigDecimal("price"));
 
         book.setAuthor(new Author(
                 resultSet.getInt("author_id"),

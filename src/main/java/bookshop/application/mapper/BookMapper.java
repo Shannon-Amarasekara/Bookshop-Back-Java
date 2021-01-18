@@ -24,6 +24,7 @@ public class BookMapper {
                 book.getGenre(),
                 book.getAuthor(),
                 book.getCopiesSold(),
-                book.getImage());
+                book.getImage(),
+                book.getPrice());
     }
 }
