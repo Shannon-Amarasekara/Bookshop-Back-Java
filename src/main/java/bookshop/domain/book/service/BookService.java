@@ -2,7 +2,6 @@ package bookshop.domain.book.service;
 
 import bookshop.domain.book.author.Author;
 import bookshop.domain.book.Book;
-import bookshop.domain.book.BookData;
 import bookshop.domain.book.repository.BookRepository;
 import bookshop.domain.book.Genre;
 import org.springframework.stereotype.Service;
@@ -19,8 +18,8 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public void saveBook(BookData bookData) {
-        bookRepository.saveBook(bookData);
+    public void saveBook(Book book) {
+        bookRepository.saveBook(book);
     }
 
     public Set<Book> getBooks() {

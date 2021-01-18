@@ -2,6 +2,7 @@ package bookshop.infrastructure.database.initialisation.table.book;
 import bookshop.domain.book.Genre;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "books")
@@ -28,27 +29,32 @@ public class BookInit {
     @Column(name = "author_id", length = 200, nullable = false)
     private int authorId;
 
+    @Column(name = "price", length = 10, nullable = false, precision = 4, scale = 2)
+    private BigDecimal price;
+
     public BookInit() {
     }
 
-    public BookInit(int id, String name, String image, Genre genre, long copiesSold, int authorId) {
+    public BookInit(int id, String name, String image, Genre genre, long copiesSold, int authorId, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.genre = genre;
         this.copiesSold = copiesSold;
         this.authorId = authorId;
+        this.price = price;
     }
 
     @Override
     public String toString() {
-        return "BookData{" +
+        return "BookInit{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", image='" + image + '\'' +
                 ", genre=" + genre +
                 ", copiesSold=" + copiesSold +
                 ", authorId=" + authorId +
+                ", price=" + price +
                 '}';
     }
 }

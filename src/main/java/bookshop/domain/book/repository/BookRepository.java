@@ -2,7 +2,6 @@ package bookshop.domain.book.repository;
 
 import bookshop.domain.book.author.Author;
 import bookshop.domain.book.Book;
-import bookshop.domain.book.BookData;
 import bookshop.domain.book.Genre;
 import bookshop.domain.user.basket.BookIds;
 
@@ -20,7 +19,7 @@ public interface BookRepository {
 
     Set<Book> findBooksByGenre(Genre genre);
 
-    void saveBook(BookData bookData);
+    void saveBook(Book book);
 
     void saveAuthor(Author author);
 }

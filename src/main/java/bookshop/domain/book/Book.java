@@ -2,6 +2,7 @@ package bookshop.domain.book;
 
 import bookshop.domain.book.author.Author;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Book {
@@ -12,17 +13,19 @@ public class Book {
     private Author author;
     private long copiesSold;
     private String image;
+    private BigDecimal price;
 
     public Book() {
     }
 
-    public Book(BookId bookId, String name, Genre genre, Author author, long copiesSold, String image) {
+    public Book(BookId bookId, String name, Genre genre, Author author, long copiesSold, String image, BigDecimal price) {
         this.id = bookId;
         this.name = name;
         this.genre = genre;
         this.author = author;
         this.copiesSold = copiesSold;
         this.image = image;
+        this.price = price;
     }
 
 
@@ -74,6 +77,10 @@ public class Book {
         this.image = image;
     }
 
+    public BigDecimal getPrice() { return price; }
+
+    public void setPrice(BigDecimal price) { this.price = price; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,11 +91,12 @@ public class Book {
                 Objects.equals(name, book.name) &&
                 genre == book.genre &&
                 Objects.equals(author, book.author) &&
-                Objects.equals(image, book.image);
+                Objects.equals(image, book.image) &&
+                Objects.equals(price, book.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, genre, author, copiesSold, image);
+        return Objects.hash(id, name, genre, author, copiesSold, image, price);
     }
 }

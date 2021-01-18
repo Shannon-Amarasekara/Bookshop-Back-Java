@@ -1,6 +1,5 @@
 package bookshop.infrastructure.repository;
 
-import bookshop.domain.book.BookData;
 import bookshop.domain.book.author.Author;
 import bookshop.domain.book.Book;
 import bookshop.domain.book.BookId;
@@ -64,14 +63,15 @@ public class BookJdbcRepository implements BookRepository {
     }
 
     @Override
-    public void saveBook(BookData bookData) {
-        String sql = "insert into books (id, name, image, genre, copies_sold, author_id) values (" +
-                bookData.getId() + ", " +
-                "'" + bookData.getName() + "', " +
-                "'" + bookData.getImage() + "', " +
-                "'" + bookData.getGenre().getGenreName() + "', " +
-                bookData.getCopiesSold() + ", " +
-                bookData.getAuthorId() + ")";
+    public void saveBook(Book book) {
+        String sql = "insert into books (id, name, image, genre, copies_sold, author_id, price) values (" +
+                book.getId().getValue() + ", " +
+                "'" + book.getName() + "', " +
+                "'" + book.getImage() + "', " +
+                "'" + book.getGenre().getGenreName() + "', " +
+                book.getCopiesSold() + ", " +
+                book.getAuthor().getId() + ", " +
+                book.getPrice() +")";
 
         jdbcTemplate.update(sql);
     }
