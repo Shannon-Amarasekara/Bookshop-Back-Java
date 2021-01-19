@@ -26,8 +26,8 @@ public class BookService {
         return bookRepository.getBooks();
     }
 
-    public Book findBookByName(String name) {
-        return bookRepository.findBookByName(name);
+    public Book findBookById(int bookId) {
+        return bookRepository.findBookById(bookId);
     }
 
     public Set<Book> findBooksByGenre(Genre genre) {

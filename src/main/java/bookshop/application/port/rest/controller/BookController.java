@@ -29,9 +29,9 @@ public class BookController {
         return BookMapper.mapBooks(books);
     }
 
-    @GetMapping("books/{name}")
-    public Book findBookByName(@PathVariable String name) {
-        bookshop.domain.book.Book book = bookService.findBookByName(name);
+    @GetMapping("books/{bookId}")
+    public Book findBookByName(@PathVariable int bookId) {
+        bookshop.domain.book.Book book = bookService.findBookById(bookId);
         return BookMapper.mapBook(book);
     }
 

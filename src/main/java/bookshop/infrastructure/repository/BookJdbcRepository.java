@@ -50,8 +50,8 @@ public class BookJdbcRepository implements BookRepository {
     }
 
     @Override
-    public Book findBookByName(String name) {
-        String sqlQuery = leftJoinSqlQuery + "where b.name = '" + name + "'";
+    public Book findBookById(int bookId) {
+        String sqlQuery = leftJoinSqlQuery + "where b.id = " + bookId + "";
         List<Book> booksBySqlQuery = getBooksBySqlQuery(sqlQuery);
         return booksBySqlQuery.get(0);
     }

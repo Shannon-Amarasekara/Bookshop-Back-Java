@@ -15,7 +15,7 @@ public interface BookRepository {
 
     Set<Book> getBooks();
 
-    Book findBookByName(String name);
+    Book findBookById(int bookId);
 
     Set<Book> findBooksByGenre(Genre genre);
 
