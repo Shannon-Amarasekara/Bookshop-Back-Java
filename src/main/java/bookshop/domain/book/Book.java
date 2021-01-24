@@ -14,11 +14,12 @@ public class Book {
     private long copiesSold;
     private String image;
     private BigDecimal price;
+    private String synopsis;
 
     public Book() {
     }
 
-    public Book(BookId bookId, String name, Genre genre, Author author, long copiesSold, String image, BigDecimal price) {
+    public Book(BookId bookId, String name, Genre genre, Author author, long copiesSold, String image, BigDecimal price, String synopsis) {
         this.id = bookId;
         this.name = name;
         this.genre = genre;
@@ -26,6 +27,7 @@ public class Book {
         this.copiesSold = copiesSold;
         this.image = image;
         this.price = price;
+        this.synopsis = synopsis;
     }
 
 
@@ -81,6 +83,10 @@ public class Book {
 
     public void setPrice(BigDecimal price) { this.price = price; }
 
+    public String getSynopsis() { return synopsis; }
+
+    public void setSynopsis(String synopsis) { this.synopsis = synopsis; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,11 +98,12 @@ public class Book {
                 genre == book.genre &&
                 Objects.equals(author, book.author) &&
                 Objects.equals(image, book.image) &&
-                Objects.equals(price, book.price);
+                Objects.equals(price, book.price) &&
+                Objects.equals(synopsis, book.synopsis);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, genre, author, copiesSold, image, price);
+        return Objects.hash(id, name, genre, author, copiesSold, image, price, synopsis);
     }
 }

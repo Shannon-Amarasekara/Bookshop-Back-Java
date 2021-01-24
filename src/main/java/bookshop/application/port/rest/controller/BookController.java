@@ -1,7 +1,7 @@
 package bookshop.application.port.rest.controller;
 
-import bookshop.application.dto.Book;
-import bookshop.application.mapper.BookMapper;
+import bookshop.application.dto.book.Book;
+import bookshop.application.mapper.book.BookMapper;
 import bookshop.domain.book.service.BookService;
 import bookshop.domain.book.Genre;
 import org.springframework.beans.factory.annotation.Autowired;

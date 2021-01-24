@@ -1,4 +1,4 @@
-package bookshop.application.dto;
+package bookshop.application.dto.book;
 
 import bookshop.domain.book.author.Author;
 import bookshop.domain.book.BookId;
@@ -15,11 +15,12 @@ public class Book {
     private long copiesSold;
     private String image;
     private BigDecimal price;
+    private String synopsis;
 
     public Book() {
     }
 
-    public Book(BookId id, String name, Genre genre, Author author, long copiesSold, String image, BigDecimal price) {
+    public Book(BookId id, String name, Genre genre, Author author, long copiesSold, String image, BigDecimal price, String synopsis) {
         this.id = id;
         this.name = name;
         this.genre = genre;
@@ -27,6 +28,7 @@ public class Book {
         this.copiesSold = copiesSold;
         this.image = image;
         this.price = price;
+        this.synopsis = synopsis;
     }
 
     public BookId getId() {
@@ -80,4 +82,8 @@ public class Book {
     public BigDecimal getPrice() { return price; }
 
     public void setPrice(BigDecimal price) { this.price = price; }
+
+    public String getSynopsis() { return synopsis; }
+
+    public void setSynopsis(String synopsis) { this.synopsis = synopsis; }
 }

@@ -1,4 +1,4 @@
-package bookshop.application.dto;
+package bookshop.application.dto.basket;
 
 import bookshop.domain.book.Book;
 
@@ -12,9 +12,14 @@ public class Basket {
     private Set<bookshop.domain.book.Book> books;
     private BigDecimal totalPrice;
 
-    public Basket(Set<bookshop.domain.book.Book> books, BigDecimal totalPrice) {
+    public Basket(Set<bookshop.domain.book.Book> books) {
         this.books = books;
-        this.totalPrice = totalPrice;
+        this.totalPrice = calculateTotalPrice();
+    }
+
+    private BigDecimal calculateTotalPrice() {
+        double sum = books.stream().mapToDouble(book -> book.getPrice().doubleValue()).sum();
+        return new BigDecimal(sum);
     }
 
     public static bookshop.domain.user.basket.Basket createEmptyBasket() {
