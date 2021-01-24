@@ -1,7 +1,7 @@
-package bookshop.application.mapper;
+package bookshop.application.mapper.book;
 
 
-import bookshop.application.dto.Book;
+import bookshop.application.dto.book.Book;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +24,8 @@ public class BookMapper {
                 book.getGenre(),
                 book.getAuthor(),
                 book.getCopiesSold(),
-                book.getImage());
+                book.getImage(),
+                book.getPrice(),
+                book.getSynopsis());
     }
 }

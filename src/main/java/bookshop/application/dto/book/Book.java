@@ -1,8 +1,10 @@
-package bookshop.application.dto;
+package bookshop.application.dto.book;
 
 import bookshop.domain.book.author.Author;
 import bookshop.domain.book.BookId;
 import bookshop.domain.book.Genre;
+
+import java.math.BigDecimal;
 
 public class Book {
 
@@ -12,17 +14,21 @@ public class Book {
     private Author author;
     private long copiesSold;
     private String image;
+    private BigDecimal price;
+    private String synopsis;
 
     public Book() {
     }
 
-    public Book(BookId id, String name, Genre genre, Author author, long copiesSold, String image) {
+    public Book(BookId id, String name, Genre genre, Author author, long copiesSold, String image, BigDecimal price, String synopsis) {
         this.id = id;
         this.name = name;
         this.genre = genre;
         this.author = author;
         this.copiesSold = copiesSold;
         this.image = image;
+        this.price = price;
+        this.synopsis = synopsis;
     }
 
     public BookId getId() {
@@ -72,4 +78,12 @@ public class Book {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public BigDecimal getPrice() { return price; }
+
+    public void setPrice(BigDecimal price) { this.price = price; }
+
+    public String getSynopsis() { return synopsis; }
+
+    public void setSynopsis(String synopsis) { this.synopsis = synopsis; }
 }

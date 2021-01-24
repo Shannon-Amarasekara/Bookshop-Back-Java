@@ -1,6 +1,5 @@
 package bookshop.infrastructure.repository;
 
-import bookshop.domain.book.BookData;
 import bookshop.domain.book.author.Author;
 import bookshop.domain.book.Book;
 import bookshop.domain.book.BookId;
@@ -19,7 +18,7 @@ import java.util.Set;
 @Repository
 public class BookJdbcRepository implements BookRepository {
 
-    private static final String leftJoinSqlQuery = "select b.id, b.author_id, b.name, b.genre, b.copies_sold, b.image, a.first_name, a.last_name, a.synopsis " +
+    private static final String leftJoinSqlQuery = "select b.id, b.author_id, b.name, b.genre, b.copies_sold, b.image, b.price, b.synopsis, a.first_name, a.last_name, a.resume " +
             "from books as b " +
             "left join authors as a " +
             "on b.author_id = a.id ";
@@ -51,8 +50,8 @@ public class BookJdbcRepository implements BookRepository {
     }
 
     @Override
-    public Book findBookByName(String name) {
-        String sqlQuery = leftJoinSqlQuery + "where b.name = '" + name + "'";
+    public Book findBookById(int bookId) {
+        String sqlQuery = leftJoinSqlQuery + "where b.id = " + bookId + "";
         List<Book> booksBySqlQuery = getBooksBySqlQuery(sqlQuery);
         return booksBySqlQuery.get(0);
     }
@@ -64,25 +63,27 @@ public class BookJdbcRepository implements BookRepository {
     }
 
     @Override
-    public void saveBook(BookData bookData) {
-        String sql = "insert into books (id, name, image, genre, copies_sold, author_id) values (" +
-                bookData.getId() + ", " +
-                "'" + bookData.getName() + "', " +
-                "'" + bookData.getImage() + "', " +
-                "'" + bookData.getGenre().getGenreName() + "', " +
-                bookData.getCopiesSold() + ", " +
-                bookData.getAuthorId() + ")";
+    public void saveBook(Book book) {
+        String sql = "insert into books (id, name, image, genre, copies_sold, author_id, price, synopsis) values (" +
+                book.getId().getValue() + ", " +
+                "'" + book.getName() + "', " +
+                "'" + book.getImage() + "', " +
+                "'" + book.getGenre().getGenreName() + "', " +
+                book.getCopiesSold() + ", " +
+                book.getAuthor().getId() + ", " +
+                book.getPrice() +", " +
+                "'" + book.getSynopsis() + "')";
 
         jdbcTemplate.update(sql);
     }
 
     @Override
     public void saveAuthor(Author author) {
-        String sqlQuery = "insert into authors (id, first_name, last_name, synopsis) values (" +
+        String sqlQuery = "insert into authors (id, first_name, last_name, resume) values (" +
                 author.getId() + ", " +
                 "'" + author.getFirstName() + "', " +
                 "'" + author.getLastName() + "', " +
-                "'" + author.getSynopsis() + "')";
+                "'" + author.getResume() + "')";
         jdbcTemplate.update(sqlQuery);
     }
 

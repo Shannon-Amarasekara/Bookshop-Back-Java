@@ -1,7 +1,7 @@
 package bookshop.application.port.rest.controller;
 
-import bookshop.application.dto.Book;
-import bookshop.application.mapper.BookMapper;
+import bookshop.application.dto.book.Book;
+import bookshop.application.mapper.book.BookMapper;
 import bookshop.domain.book.service.BookService;
 import bookshop.domain.book.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +29,9 @@ public class BookController {
         return BookMapper.mapBooks(books);
     }
 
-    @GetMapping("books/{name}")
-    public Book findBookByName(@PathVariable String name) {
-        bookshop.domain.book.Book book = bookService.findBookByName(name);
+    @GetMapping("books/{bookId}")
+    public Book findBookByName(@PathVariable int bookId) {
+        bookshop.domain.book.Book book = bookService.findBookById(bookId);
         return BookMapper.mapBook(book);
     }
 

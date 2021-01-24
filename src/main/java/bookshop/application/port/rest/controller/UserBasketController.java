@@ -1,5 +1,6 @@
 package bookshop.application.port.rest.controller;
 
+import bookshop.application.mapper.basket.BasketMapper;
 import bookshop.domain.user.UserId;
 import bookshop.domain.book.BookId;
 import bookshop.domain.book.service.BookService;
@@ -15,6 +16,7 @@ import java.net.UnknownHostException;
 
 @RestController
 @RequestMapping
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserBasketController {
 
     @Autowired
@@ -37,9 +39,10 @@ public class UserBasketController {
     }
 
     @GetMapping("viewBasket")
-    public Basket getBasket() throws UnknownHostException {
+    public bookshop.application.dto.basket.Basket getBasket() throws UnknownHostException {
         UserId userId = createUserId();
-        return userBasketService.getBasket(userId);
+        Basket basket = userBasketService.getBasket(userId);
+        return BasketMapper.mapBasket(basket);
     }
 
     private UserId createUserId() throws UnknownHostException {

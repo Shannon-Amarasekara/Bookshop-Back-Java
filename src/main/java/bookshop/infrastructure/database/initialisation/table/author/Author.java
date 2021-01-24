@@ -16,16 +16,25 @@ public class Author {
     @Column(name = "last_name", length = 100, nullable = false)
     private String lastName;
 
-    @Column(name = "synopsis", length = 300, nullable = false)
-    private String synopsis;
+    @Column(name = "resume", length = 300, nullable = false)
+    private String resume;
 
     public Author(){}
 
-    public Author(int id, String firstName, String lastName, String synopsis){
+    public Author(int id, String firstName, String lastName, String resume){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.synopsis = synopsis;
+        this.resume = resume;
     }
 
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", resume='" + resume + '\'' +
+                '}';
+    }
 }

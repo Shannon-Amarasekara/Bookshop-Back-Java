@@ -25,12 +25,13 @@ public class SqlDataToBookMapper implements RowMapper<Book> {
         book.setCopiesSold(resultSet.getLong("copies_sold"));
         book.setImage(resultSet.getString("image"));
         book.setGenre(convertToGenre(resultSet.getString("genre")));
-
+        book.setPrice(resultSet.getBigDecimal("price"));
+        book.setSynopsis(resultSet.getString("synopsis"));
         book.setAuthor(new Author(
                 resultSet.getInt("author_id"),
                 resultSet.getString("first_name"),
                 resultSet.getString("last_name"),
-                resultSet.getString("synopsis"))
+                resultSet.getString("resume"))
         );
         return book;
     }

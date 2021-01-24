@@ -7,16 +7,16 @@ public class Author {
     private int id;
     private String firstName;
     private String lastName;
-    private String synopsis;
+    private String resume;
 
     public Author() {
     }
 
-    public Author(int id, String firstName, String lastName, String synopsis) {
+    public Author(int id, String firstName, String lastName, String resume) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.synopsis = synopsis;
+        this.resume = resume;
     }
 
     public int getId() {
@@ -30,8 +30,8 @@ public class Author {
         return lastName;
     }
 
-    public String getSynopsis() {
-        return synopsis;
+    public String getResume() {
+        return resume;
     }
 
     @Override
@@ -42,11 +42,11 @@ public class Author {
         return id == author.id &&
                 Objects.equals(firstName, author.firstName) &&
                 Objects.equals(lastName, author.lastName) &&
-                Objects.equals(synopsis, author.synopsis);
+                Objects.equals(resume, author.resume);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, synopsis);
+        return Objects.hash(id, firstName, lastName, resume);
     }
 }
