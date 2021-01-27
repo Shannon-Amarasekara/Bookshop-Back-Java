@@ -31,12 +31,17 @@ public class UserBasketService {
     }
 
     public Basket getBasket(UserId userId) {
+
         if (basketExists(userId)) {
             BookIds bookIds = findExistingBasketBookIds(userId);
-            return createBasketFromBookIds(bookIds);
-        } else {
-            return emptyBasket();
+
+            if (bookIds.getBookIds().isEmpty()) {
+                return emptyBasket();
+            } else {
+                return createBasketFromBookIds(bookIds);
+            }
         }
+        return emptyBasket();
     }
 
     private Basket emptyBasket() {
@@ -55,6 +60,10 @@ public class UserBasketService {
 
     private void addBookToExistingBasket(UserId userId, BookId bookId) {
         findExistingBasketBookIds(userId).add(bookId);
+    }
+
+    public void removeBookFromBasket(BookId bookId, UserId userId) {
+        findExistingBasketBookIds(userId).remove(bookId);
     }
 
     private void createNewBasketBookIdsIfInexistent(UserId userId) {
