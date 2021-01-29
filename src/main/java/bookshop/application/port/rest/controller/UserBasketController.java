@@ -25,6 +25,14 @@ public class UserBasketController {
     @Autowired
     private BookService bookService;
 
+    @GetMapping("removeBookFromBasket/{bookIdValue}")
+    public void removeBookFromBasket(@PathVariable int bookIdValue) throws UnknownHostException {
+        BookId bookId = new BookId(bookIdValue);
+        UserId userId = createUserId();
+        userBasketService.removeBookFromBasket(bookId, userId);
+
+    }
+
     @GetMapping("addBookToBasket/{bookIdValue}")
     public void addBookToBasket(@PathVariable int bookIdValue) throws UnknownHostException {
         BookId bookId = new BookId(bookIdValue);

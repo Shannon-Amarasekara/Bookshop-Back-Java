@@ -17,6 +17,10 @@ public class BookIds {
         this.bookIds.add(bookId);
     }
 
+    public void remove(BookId bookId) {
+        bookIds.remove(bookId);
+    }
+
     public Set<BookId> getBookIds() {
         return bookIds;
     }
@@ -25,8 +29,8 @@ public class BookIds {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BookIds bookIds = (BookIds) o;
-        return Objects.equals(this.bookIds, bookIds.bookIds);
+        BookIds bookIds1 = (BookIds) o;
+        return Objects.equals(bookIds, bookIds1.bookIds);
     }
 
     @Override

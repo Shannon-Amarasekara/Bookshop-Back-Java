@@ -5,6 +5,7 @@ import bookshop.domain.book.BookId;
 import bookshop.domain.book.author.Author;
 import bookshop.domain.book.Genre;
 import bookshop.domain.book.service.BookService;
+import bookshop.domain.user.basket.BookIds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +15,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 import static bookshop.domain.book.Genre.*;
 
@@ -76,6 +79,7 @@ public class Application {
             bookService.saveBook(lordOfTheFlies);
             bookService.saveBook(theCatcherInTheRye);
             bookService.saveBook(theLightBetweenOceans);
+
 
         };
     }
