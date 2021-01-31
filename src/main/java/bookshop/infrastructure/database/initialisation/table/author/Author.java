@@ -2,7 +2,7 @@ package bookshop.infrastructure.database.initialisation.table.author;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 @Table(name = "authors")
 public class Author {
 

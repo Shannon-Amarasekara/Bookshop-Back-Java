@@ -4,7 +4,7 @@ import bookshop.domain.book.Genre;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
+//@Entity
 @Table(name = "books")
 public class BookInit {
 
