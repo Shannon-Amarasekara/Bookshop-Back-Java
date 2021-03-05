@@ -1,4 +1,3 @@
-
 insert into books(id, name, image, genre, copies_sold, author_id, price, synopsis)
 values
 (0, 'Misery', 'https://upload.wikimedia.org/wikipedia/en/6/6f/Stephen_King_Misery_cover.jpg', 'Horror', 875000, 1, 8.99, 'synopsis of misery'),
