@@ -32,7 +32,7 @@ public class BookInit {
     @Column(name = "price", length = 10, nullable = false, precision = 4, scale = 2)
     private BigDecimal price;
 
-    @Column(name = "synopsis", length = 1000, nullable = false)
+    @Column(name = "synopsis", length = 2000, nullable = false)
     private String synopsis;
 
     public BookInit() {
