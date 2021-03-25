@@ -32,8 +32,8 @@ public class BookService {
 
     public Set<Book> findBooksByGenre(String genre) {
         String genreLowerCase = genre.toLowerCase(Locale.ROOT);
-        char firstCharacter = Character.toUpperCase(genreLowerCase.charAt(0));
-        String genreCamelCase = genreLowerCase.replace(genreLowerCase.charAt(0), firstCharacter);
+        char firstChar = genreLowerCase.charAt(0);
+        String genreCamelCase = Character.toUpperCase(firstChar) + genreLowerCase.substring(1);
         return bookRepository.findBooksByGenre(Genre.valueOf(genreCamelCase));
     }
 
