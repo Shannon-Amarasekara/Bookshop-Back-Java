@@ -7,6 +7,9 @@ import bookshop.domain.book.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 @RestController
@@ -36,7 +39,7 @@ public class BookController {
     }
 
     @GetMapping("books/genre/{genre}")
-    public Set<Book> findBooksByGenre(@PathVariable Genre genre) {
+    public Set<Book> findBooksByGenre(@PathVariable String genre) {
         Set<bookshop.domain.book.Book> books = bookService.findBooksByGenre(genre);
         return BookMapper.mapBooks(books);
     }

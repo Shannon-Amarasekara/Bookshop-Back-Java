@@ -30,8 +30,11 @@ public class BookService {
         return bookRepository.findBookById(bookId);
     }
 
-    public Set<Book> findBooksByGenre(Genre genre) {
-        return bookRepository.findBooksByGenre(genre);
+    public Set<Book> findBooksByGenre(String genre) {
+        String genreLowerCase = genre.toLowerCase(Locale.ROOT);
+        char firstChar = genreLowerCase.charAt(0);
+        String genreCamelCase = Character.toUpperCase(firstChar) + genreLowerCase.substring(1);
+        return bookRepository.findBooksByGenre(Genre.valueOf(genreCamelCase));
     }
 
     public Set<Book> getFiveRandomBestsellers() {
